@@ -1,0 +1,20 @@
+{
+  "name": "configurator.js",
+  "version": "0.0.1",
+  "description": "'a simple api for safe keeping your configurations'",
+  "main": "configurator.js",
+  "scripts": {
+    "test": "node spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/influx6/configurator.js"
+  },
+  "keywords": [
+    "configurations",
+    "configurator",
+    "settings"
+  ],
+  "author": "Alexander Adeniyin Ewetumo",
+  "license": "mit"
+}

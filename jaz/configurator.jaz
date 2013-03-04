@@ -1,0 +1,58 @@
+var ts = require('tsk').ToolStack,
+configurator = require('../configurator'),
+m = ts.Matchers,
+specs =  ts.Jaz.createManager();
+
+specs.add('describing configurator tests',function(){
+
+	var config = configurator.extends();
+
+	this.it('can create configurator object',function(){
+		var c = config.extends();
+		m.scoped(this).obj(c).isValid();
+		m.scoped(this).obj(c).hasKeyForm('use','function');
+		m.scoped(this).obj(c).hasKeyForm('configuration','function');
+		m.scoped(this).obj(c).hasKeyForm('load','function');
+	});
+
+	this.it('can add configuration function',function(){
+		config.configuration('keyHandler',(function(){
+			return {
+				k: function(key){ return key+1; }
+			};
+		})());
+
+		m.scoped(this).obj(config.use('keyHandler')).isValid();
+		m.scoped(this).obj(config.use('keyHandler').k).isType('function');
+		m.scoped(this).obj(config.use('keyHandler').k(324)).is(325);
+	});
+
+	this.it('can add a configuration object',function(){
+
+		config.configuration('objectAdder',{
+			adder: function(){}
+		});
+
+		m.scoped(this).obj(config.use('objectAdder')).isValid();
+		m.scoped(this).obj(config.use('objectAdder')).hasKeyForm('adder','function');
+	});
+
+	this.it('can add a setting state',function(){
+		config.set('iterable',false);
+
+		m.scoped(this).obj(config.get('iterable')).isValid();
+		m.scoped(this).obj(config.enabled('iterable')).is(true);
+		m.scoped(this).obj(config.disabled('iterable')).is(false);
+
+	});
+
+	this.it('can extend a new configurator',function(){
+		var c = config.extends();
+		m.scoped(this).obj(c).isValid();
+		m.scoped(this).obj(c.settings).isType('object');
+		m.scoped(this).obj(c.configurations).isType('object');
+	});
+
+});
+
+module.exports = specs;

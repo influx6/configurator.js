@@ -1,0 +1,1 @@
+require('./jaz/configurator.jaz').run();
