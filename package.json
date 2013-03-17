@@ -1,5 +1,5 @@
 {
-  "name": "configurator.js",
+  "name": "configuratorjs",
   "version": "0.0.1",
   "description": "'a simple api for safe keeping your configurations'",
   "main": "configurator.js",
