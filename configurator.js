@@ -26,7 +26,7 @@ _c.set = function(key,value){
 };
 
 _c.get = function(key){
-	return helpers.fetch.call(this.settings,key);
+	return helpers.fetch.call(this.settings,key).val;
 };
 
 _c.enable = function(key){
